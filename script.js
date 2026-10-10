@@ -6,7 +6,7 @@
   For local testing, run app.py and use this address.
   When deployed, replace it with your hosted backend URL.
 */
-const API_BASE = "http://127.0.0.1:5000";
+const API_BASE = "https://backend-wheredidmoneygo.onrender.com/";
 
 const $ = (id) => document.getElementById(id);
 
