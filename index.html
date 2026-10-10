@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff7f5">
+  <title>Where Did My Money Go?</title>
+  <meta name="description" content="A personal expense tracker to understand spending, manage budgets, and work towards savings goals.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#">
+        <span class="brand-icon">♡</span>
+        <span>penny<span class="brand-dot">.</span><small>YOUR MONEY, YOUR STORY</small></span>
+      </a>
+
+      <p class="nav-label">MENU</p>
+      <nav>
+        <a class="nav-link active" href="#dashboard">▦ <span>Dashboard</span></a>
+        <a class="nav-link" href="#transactions">↔ <span>Transactions</span></a>
+        <a class="nav-link" href="#insights">◔ <span>Spending insights</span></a>
+        <a class="nav-link" href="#goals">♡ <span>Savings goals</span></a>
+      </nav>
+
+      <div class="sidebar-note">
+        <span>✿</span>
+        <strong>Little steps add up.</strong>
+        <p>Every rupee has a story. Let's make yours count.</p>
+      </div>
+
+      <p class="sidebar-footer">MADE WITH ♡ FOR YOUR MONEY</p>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR PERSONAL MONEY DIARY</p>
+          <h1>Where did my money go? <span>♡</span></h1>
+          <p class="subtitle">A little more awareness, a little more peace.</p>
+        </div>
+        <div class="month-picker">
+          <label for="monthFilter">MONTH</label>
+          <input type="month" id="monthFilter">
+        </div>
+      </header>
+
+      <div id="notice" class="notice" role="status" aria-live="polite"></div>
+
+      <section class="summary-grid">
+        <article class="summary-card balance-card">
+          <div class="card-top"><span>Spent this month</span><span class="round-icon">↗</span></div>
+          <p class="money" id="totalSpent">₹0.00</p>
+          <p class="card-caption">Your spending, all in one place</p>
+          <span class="card-decoration">♡</span>
+        </article>
+
+        <article class="summary-card budget-card">
+          <div class="card-top"><span>Budget remaining</span><span class="round-icon">⌂</span></div>
+          <p class="money" id="budgetRemaining">—</p>
+          <p class="card-caption" id="budgetCaption">Set a monthly budget below</p>
+          <div class="progress-track"><div id="budgetProgress" class="progress-fill"></div></div>
+        </article>
+
+        <article class="summary-card savings-card">
+          <div class="card-top"><span>Savings goal</span><span class="round-icon">♡</span></div>
+          <p class="money" id="savingsGoal">₹0.00</p>
+          <p class="card-caption" id="savingsCaption">Your goal starts here</p>
+          <div class="progress-track"><div id="savingsProgress" class="progress-fill"></div></div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel spending-panel" id="insights">
+          <div class="section-heading">
+            <div><p class="eyebrow">THE BREAKDOWN</p><h2>Where it went</h2></div>
+            <span class="soft-badge">This month</span>
+          </div>
+          <div id="categoryChart" class="category-chart">
+            <p class="empty-state">Your spending breakdown will appear here.</p>
+          </div>
+        </article>
+
+        <article class="panel add-panel" id="addExpense">
+          <div class="section-heading">
+            <div><p class="eyebrow">MAKE A LITTLE NOTE</p><h2>Add an expense</h2></div>
+            <span class="form-heart">♡</span>
+          </div>
+
+          <form id="expenseForm">
+            <label for="expenseTitle">What did you spend on?</label>
+            <input id="expenseTitle" name="title" placeholder="e.g. Coffee with friends" required maxlength="100">
+
+            <div class="form-row">
+              <div>
+                <label for="expenseAmount">Amount (₹)</label>
+                <input id="expenseAmount" name="amount" type="number" min="0.01" step="0.01" placeholder="150" required>
+              </div>
+              <div>
+                <label for="expenseDate">Date</label>
+                <input id="expenseDate" name="expense_date" type="date" required>
+              </div>
+            </div>
+
+            <label for="expenseCategory">Category</label>
+            <select id="expenseCategory" name="category">
+              <option>Food</option>
+              <option>Shopping</option>
+              <option>Travel</option>
+              <option>Entertainment</option>
+              <option>Education</option>
+              <option>Bills</option>
+              <option>Health</option>
+              <option>Other</option>
+            </select>
+
+            <label for="expenseNote">Little note (optional)</label>
+            <input id="expenseNote" name="note" placeholder="Anything you want to remember?">
+
+            <button class="primary-button" type="submit">＋ Save this expense</button>
+          </form>
+        </article>
+      </section>
+
+      <section class="panel transactions-panel" id="transactions">
+        <div class="section-heading">
+          <div><p class="eyebrow">YOUR MONEY DIARY</p><h2>Recent transactions</h2></div>
+          <span id="transactionCount" class="soft-badge">0 entries</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>EXPENSE</th><th>CATEGORY</th><th>DATE</th><th>AMOUNT</th><th>ACTION</th></tr></thead>
+            <tbody id="expenseList">
+              <tr><td colspan="5" class="empty-state">Your expenses will show up here ♡</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel goals-panel" id="goals">
+        <div class="section-heading">
+          <div><p class="eyebrow">PLAN A LITTLE AHEAD</p><h2>Your money goals</h2></div>
+          <span class="form-heart">✿</span>
+        </div>
+        <form id="settingsForm" class="settings-form">
+          <div>
+            <label for="monthlyBudget">Monthly spending budget (₹)</label>
+            <input id="monthlyBudget" type="number" min="0" step="0.01" placeholder="5000" required>
+          </div>
+          <div>
+            <label for="goalName">Savings goal name</label>
+            <input id="goalName" maxlength="100" placeholder="e.g. New headphones">
+          </div>
+          <div>
+            <label for="goalAmount">Savings goal amount (₹)</label>
+            <input id="goalAmount" type="number" min="0" step="0.01" placeholder="12000" required>
+          </div>
+          <button class="primary-button" type="submit">Save my goals ♡</button>
+        </form>
+      </section>
+
+      <footer>Take a breath. You're learning. You're growing. ♡</footer>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
